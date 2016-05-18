@@ -3,22 +3,21 @@
 import _ = require('lodash');
 import net = require('net');
 import irc = require('slate-irc');
-
 import {cfg} from './config';
+import * as nano from './nanobot';
 
-interface NamesEvent {
-    channel: string;
-    names: { name: string, mode: string }[];
-}
-
-declare module "slate-irc" {
-    interface Client {
-        on(event: 'names', callback: (e: NamesEvent) => void);
-    }
-}
-
-type Middleware = (data: any, next: () => void) => void;
-type Stack = Middleware[];
+const EVENTS = [
+    'data',
+    'welcome',
+    'message',
+    'notice',
+    'motd',
+    'join',
+    'part',
+    'nick',
+    'quit',
+    'names',
+];
 
 class Bot {
     private stacks = {};
@@ -27,27 +26,14 @@ class Bot {
 
     constructor(client: irc.Client) {
         this.client = client;
-
-        var events = [
-            'data',
-            'welcome',
-            'message',
-            'notice',
-            'motd',
-            'join',
-            'part',
-            'nick',
-            'quit',
-            'names',
-        ];
-
-        events.forEach(n => this.client.on(n, data => {
+        
+        EVENTS.forEach(n => this.client.on(n, data => {
             if (!this.stacks[n]) return;
             this.run(data, this.stacks[n]);
         }));
     }
 
-    use(event: string, fn: Middleware) {
+    use(event: string, fn: nano.Middleware) {
         if (!this.stacks[event]) this.stacks[event] = [];
         this.stacks[event].push(fn);
     }
@@ -61,11 +47,11 @@ class Bot {
         this.client.join(cfg.channel);
     }
 
-    private run(data: any, stack: Middleware[]) {
+    private run(data: any, stack: nano.Middleware[]) {
         let cont = false;
         let next = () => { cont = true };
         for (var i = 0; i < stack.length; i++) {
-            stack[i](data, next);
+            stack[i](this.client, data, next);
             if (!cont) break;
         }
     }
@@ -80,8 +66,8 @@ const client = irc(stream);
 
 const bot = new Bot(client);
 
-// bot.use('data', (x: irc.DataEvent) => console.log(x));
+bot.use('data', (client, data) => {
+    console.log(data);
+});
 
-bot.use('names', (x: NamesEvent) => console.log(x.names));
-bot.use('names', (x: NamesEvent) => console.log(x.channel));
 bot.connect(cfg);
