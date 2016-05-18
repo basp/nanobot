@@ -6,10 +6,8 @@ import irc = require('slate-irc');
 import moment = require('moment');
 import {cfg} from './config';
 import * as nano from './nanobot';
-
-import {Bot} from './nanobot';
 import {greeter} from './greeter';
-import {age} from './commands';
+import {command} from './commands';
 
 const stream = net.connect({
     port: 6667,
@@ -18,13 +16,13 @@ const stream = net.connect({
 
 const client = irc(stream);
 
-const bot = new Bot(client);
+const bot = new nano.Bot(client);
 
 bot.use('data', (client, data, next) => {
     next();
 });
 
-bot.use('message', age(cfg.nick, moment()));
+bot.use('message', command(cfg.nick));
 
 bot.use('names', greeter([cfg.nick]))
 
