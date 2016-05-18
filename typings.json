@@ -1,5 +1,6 @@
 {
   "ambientDependencies": {
+    "moment": "registry:dt/moment#2.8.0+20160316155526",
     "node": "registry:dt/node#6.0.0+20160514165920",
     "slate-irc": "registry:dt/slate-irc#0.0.0+20160223124646"
   },
