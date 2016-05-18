@@ -2,5 +2,8 @@
   "ambientDependencies": {
     "node": "registry:dt/node#6.0.0+20160514165920",
     "slate-irc": "registry:dt/slate-irc#0.0.0+20160223124646"
+  },
+  "dependencies": {
+    "lodash": "registry:npm/lodash#4.0.0+20160416211519"
   }
 }
