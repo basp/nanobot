@@ -6,6 +6,8 @@ import irc = require('slate-irc');
 import {cfg} from './config';
 import * as nano from './nanobot';
 
+import {greeter} from './greeter';
+
 const EVENTS = [
     'data',
     'welcome',
@@ -26,7 +28,7 @@ class Bot {
 
     constructor(client: irc.Client) {
         this.client = client;
-        
+
         EVENTS.forEach(n => this.client.on(n, data => {
             if (!this.stacks[n]) return;
             this.run(data, this.stacks[n]);
@@ -66,8 +68,20 @@ const client = irc(stream);
 
 const bot = new Bot(client);
 
-bot.use('data', (client, data) => {
+bot.use('data', (client, data, next) => {
     console.log(data);
+    next();
 });
 
-bot.connect(cfg);
+bot.use('names', greeter([cfg.nick]))
+
+bot.use('message', (client, e: irc.MessageEvent, next) => {
+    // Do stuff here...
+    next();
+});
+
+bot.use('message', (client, e: irc.MessageEvent, next) => {
+    // Or here... 
+});
+
+bot.connect(cfg); 

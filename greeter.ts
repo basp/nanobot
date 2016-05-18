@@ -1,15 +1,19 @@
 import irc = require('slate-irc');
 import greetings = require('greetings');
+import _ = require('lodash');
 import * as nano from './nanobot';
+import * as utils from './utils';
 
-function greeter(channel: string, nick: string): nano.Middleware {
+function greeter(aliases: string[]): nano.Middleware {
     return (client: irc.Client, data: nano.NamesEvent, next) => {
-        const others = data.names
-            .filter(x => x.name !== nick)
-            .map(x => x.name);
-        
-        const to = others.length > 1 ? 'guys' : others[0]; 
+        const names = data.names.map(x => x.name);
+        const others = utils.others(aliases, names); 
+        const to = others.length > 1 ? 'guys' : others[0];
         const msg = `${greetings()} ${to}!`;
-        client.send(channel, msg);
+        client.send(data.channel, msg);
     };
 };
+
+export {
+greeter
+}
