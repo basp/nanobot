@@ -41,3 +41,6 @@ typings
 
 # Settings
 .vscode
+
+# Config
+config.example.ts
