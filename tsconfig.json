@@ -1,0 +1,12 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "target": "es5",
+        "moduleResolution": "node",
+        "module": "commonjs"
+    },
+    "exclude": [
+        "node_modules",
+        "typings"
+    ]
+}
