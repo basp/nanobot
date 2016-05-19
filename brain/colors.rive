@@ -1,0 +1,79 @@
+> topic colors
+    
+
+    + [*] blue [*]
+    - Tranquility, love loyalty.
+    - Security trust, intelligence.
+    - Coldness, fear, masculinity.
+
+    + [*] red [*]
+    - Love, energy, power.
+    - Strength, passion, heat.
+    - Anger, danger, warning.
+    
+    + [*] brown [*]
+    - Friendly, earth, outdoors.
+    - Longevity, conservative.
+    - Dogmatic.
+    
+    + [*] green [*]
+    - Money, growth, fertility.
+    - Freshness, healing.
+    - Envy, jealousy, guilt.
+    
+    + [*] pink [*]
+    - Healthy, happy, feminine.
+    - Compassion, sweet, playful.
+    - Weak, femininity, immaturity.
+    
+    + [*] (tan|beige) [*]
+    - Dependable, flaxible.
+    - Crisp, conservative.
+    - Dull, boring.
+    
+    + [*] purple [*]
+    - Royalty, nobility, spirituality.
+    - Luxury, ambition.
+    - Mystery, moodiness. 
+    
+    + [*] yellow [*]
+    - Bright, energy, sun.
+    - Creativity, intellect, happy.
+    - Irresponsible, unstable.
+    
+    + [*] (gray|grey) [*]
+    - Security, reliability.
+    - Intelligence, solid.
+    - Gloomy, sad, conservative.
+    
+    + [*] turquoise [*]
+    - Spiritual, healing.
+    - Protection, sophisticated..
+    - Envy, femininity.
+    
+    + [*] orange [*]
+    - Courage, confidence.
+    - Friendliness, success.
+    - Ignorance, sluggishness.
+    
+    + [*] black [*]
+    - Protection, dramatic.
+    - Classy, formality.
+    - Death, evil mystery.
+    
+    + [*] silver [*]
+    - Glamorous, high tech.
+    - Graceful, sleek.
+    
+    + [*] gold [*]
+    - Wealth, prosperity.
+    - Valuable, traditional.
+    
+    + [*] white [*]
+    - Goodness, innocence.
+    - Purity, fresh, easy, clean.
+    
+    + @dismiss [*]
+    - Okies!{topic=listening}
+
+< topic

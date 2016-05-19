@@ -8,6 +8,15 @@ function others(aliases: string[], names: string[]): string[] {
     });
 }
 
+function parseBool(s: string) {
+    switch (s.toLowerCase()) {
+        case 'true': return true;
+        case '1': return true;
+        default: return false;        
+    }
+}
+
 export {
-others
+others,
+parseBool
 }

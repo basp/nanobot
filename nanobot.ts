@@ -29,8 +29,8 @@ const EVENTS = [
 ];
 
 export class Bot {
-    private stacks = {};
     private client: irc.Client;
+    private stacks = {};
     private cfg: any;
 
     constructor(client: irc.Client) {

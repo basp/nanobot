@@ -1,8 +1,8 @@
 import irc = require('slate-irc');
 import greetings = require('greetings');
 import _ = require('lodash');
-import * as nano from './nanobot';
-import * as utils from './utils';
+import * as nano from '../nanobot';
+import * as utils from '../utils';
 
 function greeter(aliases: string[]): nano.Middleware {
     return (client: irc.Client, data: nano.NamesEvent, next) => {

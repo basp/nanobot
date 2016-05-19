@@ -1,6 +1,5 @@
-import moment = require('moment');
 import irc = require('slate-irc');
-import * as nano from './nanobot';
+import * as nano from '../nanobot';
 
 function command(nick: string): nano.Middleware {
     return (client, data: irc.MessageEvent, next) => {
@@ -12,8 +11,6 @@ function command(nick: string): nano.Middleware {
         console.log(chunks);
     }
 }
-
-// function age(born: Moment)...
 
 export {
 command
