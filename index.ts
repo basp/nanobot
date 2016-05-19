@@ -41,7 +41,6 @@ function loadingDone() {
     bot.use('message', (client: irc.Client, data: irc.MessageEvent, next) => {
         const engaged = utils.parseBool(brain.getUservar(data.from, 'engaged')); 
         const topic = brain.getUservar(data.from, 'topic');
-        if (engaged) console.log(`User ${data.from} with topic ${topic}.`);
         const aliases = cfg.aliases.map(x => x.toLowerCase());
         const s = S(data.message.toLowerCase());
         if (!engaged && !_(aliases).some(x => s.contains(x))) return;
@@ -55,7 +54,6 @@ function loadingDone() {
     });
 
     bot.use('names', greeter([cfg.nick]))
-
     bot.connect(cfg);
 }
 
