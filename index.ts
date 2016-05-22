@@ -20,12 +20,14 @@ function logMarkovProgress(path: string): void {
     console.log(`Loaded ${path}`);
 }
 
-RSVP.hash({
+const promises = {
     cat: init('c:/temp/cat.txt', 4, logMarkovProgress),
     chat: init('c:/temp/chat-sanitized.log', 2, logMarkovProgress),
     plato: init('c:/temp/plato.txt', 3, logMarkovProgress),
     shakespeare: init('c:/temp/shakespeare.txt', 2, logMarkovProgress)
-}).then(r => {
+};
+
+RSVP.hash(promises).then(r => {
     const cat: Markov = r.cat;
     const chat: Markov = r.chat;
     const plato: Markov = r.plato;
@@ -47,6 +49,7 @@ RSVP.hash({
         const msg = plato.respond(e.message)
             .map(x => x.trim())
             .join(' ');
+
         bot.say(cfg.channel, msg);
     });
 
