@@ -1,0 +1,67 @@
++ about subject
+- You can use this command to find out random things I know about stuff.\s
+^ You can use the "subjects" command to see what kind of subjects I know about.\s
+^ Just type "meth, subjects" to get started.
+
++ about *
+- <call>about <star1></call>
+
++ subjects *
+- I know about <call>subjects <star1></call>.
+
+// Raw facts
++ forget (s|subject) * (p|predicate) * (o|object) *
+- <call>forget <star2> <star4> <star6></call>
+
++ learn (s|subject) * (p|predicate) * (o|object) *
+- <call>putTriple <star2> <star4> <star6></call>
+
+// Locations
++ the location of * is [in] *
+- From that I understand that the location of <star1> is in <star2>.
+
++ * is (located|situated) in *
+- From that I understand that the location of <star1> is in <star3>.\s
+^ <call>putTriple <star1> location <star3></call>
+
++ * are (located|situated) in *
+- From that I understand that the location of <star1> is in <star3>.\s
+^ <call>putTriple <star1> location <star3></call>
+
++ where is *
+- <call>location <star1></call>
+
+// Classification
++ * are a kind of *
+- From that I understand that <star1> are a special class of <star2>.\s
+^ <call>putTriple <star1> is_a <star2></call>
+
++ * is a kind of *
+- From that I understand that <star1> is a specialed class of <star2>.\s
+^ <call>putTriple <star1> is_a <star2></call>
+
++ * are a *
+- From that I understand that <star1> are in the <star2> class.\s
+^ <call>putTriple <star1> is_a <star2></call>
+
++ * is a *
+- From that I understand that <star1> is in the <star2> class.\s
+^ <call>putTriple <star1> is_a <star2></call>
+
+// Relations
++ * is related to *
+- From that I understand that there's a relation between <star1> and <star2>.\s
+^ <call>putTriple <star1> related <star2></call>
+
++ * are related to *
+- From that I understand that there's a relation between <star2> and <star2>.\s
+^ <call>putTriple <star1> related <star2></call>
+
+// Basic facts
++ * is *
+- From that I understand that <star1> has the quality of being <star2>.\s
+^ <call>putTriple <star1> is <star2></call>
+
++ * are *
+- From that I understand that <star1> have the quality of being <star2>.\s
+^ <call>putTriple <star1> are <star2></call>

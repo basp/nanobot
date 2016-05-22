@@ -110,6 +110,28 @@ RSVP.hash(promises).then(r => {
                 return resolve(msg);
             });
         }));
+        
+    brain.setSubroutine('location', 
+        (rs, args) => new RSVP.Promise((resolve, reject) => {
+            const subject = args[0];
+            const predicate = 'location';
+            db.get({ subject, predicate, limit: 10 }, (err, list) => {
+                if (err) return reject(err);
+                return resolve(formalList(list)); 
+            });
+        }));
+
+    brain.setSubroutine('forget',
+        (rs, args) => new RSVP.Promise((resolve, reject) => {
+            const subject = args[0];
+            const predicate = args[1];
+            const object = args[2];
+            const triple = { subject, predicate, object };
+            db.del(triple, err => {
+                if (err) return reject(err);
+                return resolve('OK!');
+            });
+        }));
 
     brain.setSubroutine('about',
         (rs, args) => new RSVP.Promise((resolve, reject) => {
@@ -131,8 +153,7 @@ RSVP.hash(promises).then(r => {
                 subjects = _.uniq(subjects);
                 subjects = _.shuffle(subjects);
                 subjects = _.take(subjects, 5);
-                const reply = `I know about things such as ${formalList(subjects)}.`;
-                return resolve(reply);
+                return resolve(formalList(subjects));
             })
         }));
 
