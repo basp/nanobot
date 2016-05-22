@@ -11,6 +11,7 @@
     "url": "https://github.com/basp/nanobot"
   },
   "dependencies": {
+    "markov": "0.0.7",
     "rsvp": "^3.2.1",
     "slate-irc": "^0.8.1",
     "speakeasy-nlp": "^0.2.2"
