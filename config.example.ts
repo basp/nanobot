@@ -1,10 +1,10 @@
 const cfg = {
-    username: '',
-    password: '',
     nick: '',
-    channel: '',
-    user: ''
-}
+    password: '',
+    username: '',
+    user: '',
+    channel: ''
+};
 
 export {
 cfg

@@ -1,65 +1,41 @@
-/// <reference path="typings/index.d.ts" />
-
-import _ = require('lodash');
-import S = require('string');
-import net = require('net');
+import RSVP = require('rsvp');
 import irc = require('slate-irc');
-import moment = require('moment');
-import * as utils from './utils';
-import {cfg} from './config';
-import * as nano from './nanobot';
-import {greeter} from './plugins/greeter';
-import {command} from './plugins/commands';
+import net = require('net');
 
-const RiveScript = require('rivescript');
+import {Bot, BotConfig} from './nanobot';
 
-function loadingDone() {
-    brain.sortReplies();
-    brain.setVariable('name', cfg.nick);
+var speak = require('speakeasy-nlp');
 
-    brain.setSubroutine('random', (from, to) => {
-        return Math.random();
-    });
+const cfg: BotConfig = {
+    nick: 'Methbot',
+    password: 'Foo123',
+    user: 'https://github.com/basp/methbot',
+    username: 'Methbot',
+    channel: '##vanityguild'
+};
+
+const stream = net.connect({
+    port: 6667,
+    host: 'irc.freenode.org'
+});
+
+const client = irc(stream);
+const bot = new Bot(client);
+
+bot.use('data', data => {
+    console.log(data);
+});
+
+bot.use('message', (e: irc.MessageEvent, next) => {
+    const c = speak.classify(e.message);
+    const s = speak.sentiment.analyze(e.message);
+    console.log(c);
+    console.log(`SCORE: ${s.score}`);
+    next();
+});
+
+bot.msg(/meth|methbot/, (e: irc.MessageEvent, m) => {
     
-    brain.setSubroutine('dice', (args) => {
-        return JSON.stringify(args); 
-    });
+});
 
-    const stream = net.connect({
-        port: 6667,
-        host: 'irc.freenode.org'
-    });
-
-    const client = irc(stream);
-    const bot = new nano.Bot(client);
-
-    bot.use('data', (client, data, next) => {
-        console.log(data);
-        next();
-    });
-
-    bot.use('message', (client: irc.Client, data: irc.MessageEvent, next) => {
-        const engaged = utils.parseBool(brain.getUservar(data.from, 'engaged')); 
-        const topic = brain.getUservar(data.from, 'topic');
-        const aliases = cfg.aliases.map(x => x.toLowerCase());
-        const s = S(data.message.toLowerCase());
-        if (!engaged && !_(aliases).some(x => s.contains(x))) return;
-        next();
-    });
-
-    bot.use('message', (client: irc.Client, data: irc.MessageEvent) => {
-        brain.setUservar(data.from, 'from', data.from);
-        const reply = brain.reply(data.from, data.message);
-        client.send(cfg.channel, reply);
-    });
-
-    bot.use('names', greeter([cfg.nick]))
-    bot.connect(cfg);
-}
-
-function loadingError(err) {
-    console.error(err);
-}
-
-const brain = new RiveScript()
-brain.loadDirectory('./brain', loadingDone, loadingError);
+bot.connect(cfg);

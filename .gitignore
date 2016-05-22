@@ -32,9 +32,9 @@ node_modules
 # Optional REPL history
 .node_repl_history
 
-# Generated
-**/*.js
-**/*.js.map
+# Artifacts
+*.js
+*.js.map
 
 # Typings
 typings
@@ -42,5 +42,8 @@ typings
 # Settings
 .vscode
 
-# Config
+# Private
 config.ts
+
+# Runtime
+db
