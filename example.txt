@@ -1,0 +1,20 @@
+<Aazeen> Meth works by subject, predicate object. It stores everything as a tripled of those.
+<Methbot> a few of yourself more hero." generations. think of our as a.
+<Aazeen> you could (theoretically) use her to just store random shit
+<Aazeen> If you want her to remember some fact you *could* go: "meth, learn subject foo predicate is something object nice"
+<Methbot> {"subject":"foo","predicate":"is something","object":"nice"}
+<Aazeen> it's hard to get stuff back reliably though...
+<Aazeen> meth, about foo
+<Methbot> Foo is something nice.
+<Aazeen> If there's only one fact ok but otherwise it will be a bit random :)
+<Aazeen> If you wanna her to forget you have to give the right triple in lowercase:
+<Aazeen> meth, forget subject foo predicate is something object nice
+<Methbot> OK!
+<Aazeen> meth about foo
+<Methbot> Sadly I know nothing about foo.
+<Aazeen> there!
+<Methbot> Ah well, then just don't put anything of value in there :).
+<Aazeen> You're right meth :)
+<Methbot> As Plato would say: "of their their revenge; or come themselves, some if they do not like to".
+<Melthiela> Lol :P
+<Melthiela> That's awesome though!

@@ -110,14 +110,20 @@ RSVP.hash(promises).then(r => {
                 return resolve(msg);
             });
         }));
-        
-    brain.setSubroutine('location', 
+
+    brain.setSubroutine('location',
         (rs, args) => new RSVP.Promise((resolve, reject) => {
             const subject = args[0];
             const predicate = 'location';
             db.get({ subject, predicate, limit: 10 }, (err, list) => {
                 if (err) return reject(err);
-                return resolve(formalList(list)); 
+                const locations = list.map(x => x.object);
+                if (locations.length === 0) {
+                    return resolve(`Sadly I have no knowledge of the whereabouts of ${args[0]}.`);
+                }
+
+                const reply = `Known locations of ${args[0]} are: ${formalList(locations)}`;
+                return resolve(reply);
             });
         }));
 
@@ -138,7 +144,10 @@ RSVP.hash(promises).then(r => {
             const subject = args[0];
             db.get({ subject }, (err, list) => {
                 if (err) return reject(err);
-                if (list.length === 0) return resolve(`Sadly I know nothing about ${subject}.`);
+                if (list.length === 0) {
+                    return resolve(`Sadly I know nothing about ${subject}.`);
+                }
+
                 const t: any = _(list).shuffle().first();
                 const msg = `${t.subject} ${t.predicate} ${t.object}.`;
                 return resolve(S(msg).capitalize());
@@ -147,14 +156,42 @@ RSVP.hash(promises).then(r => {
 
     brain.setSubroutine('subjects',
         (rs, args) => new RSVP.Promise((resolve, reject) => {
+            const count = +(args[0]);
             db.get({ limit: 100 }, (err, list) => {
                 if (err) return reject(err);
                 let subjects = list.map(x => x.subject);
                 subjects = _.uniq(subjects);
                 subjects = _.shuffle(subjects);
-                subjects = _.take(subjects, 5);
+                subjects = _.take(subjects, count);
                 return resolve(formalList(subjects));
             })
+        }));
+
+    brain.setSubroutine('types',
+        (rs, args) => new RSVP.Promise((resolve, reject) => {
+            const subject = args[0];
+            const predicate = 'is_a';
+            db.get({ subject, predicate }, (err, list) => {
+                if (err) return reject(err);
+                return resolve(JSON.stringify(list));
+            });
+        }));
+
+    brain.setSubroutine('aboutKind',
+        (rs, args) => new RSVP.Promise((resolve, reject) => {
+            const subject = args[0];
+            const predicate = 'is_a';
+            db.get({ subject, predicate, limit: 5 }, (err, list) => {
+                if (err) return reject(err);
+                if (list.length === 0) {
+                    return resolve(`I don't know enough about ${subject} yet. Try telling me more!`);
+                }
+            
+                const index = Math.floor(Math.random() * list.length);
+                const answer = list[index];
+                const reply = `${answer.subject} is a ${answer.object}.`;    
+                return resolve(reply);
+            });
         }));
 
     brain.setSubroutine('sentiment',

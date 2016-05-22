@@ -6,8 +6,9 @@
 + about *
 - <call>about <star1></call>
 
-+ subjects *
-- I know about <call>subjects <star1></call>.
++ subjects
+- I know about <call>subjects 20</call> and lots of more stuff.
+- I studied <call>subjects 5</call> but remember you can teach me new stuff as well. 
 
 // Raw facts
 + forget (s|subject) * (p|predicate) * (o|object) *
@@ -51,6 +52,12 @@
 + * is a *
 - From that I understand that <star1> is in the <star2> class.\s
 ^ <call>putTriple <star1> is_a <star2></call>
+
++ what is *{weight=100}
+^ <call>aboutKind <star1></call>
+
++ what are *{weight=100}
+^ <call>aboutKind <star1></call>
 
 // Relations
 + * is related to *
