@@ -2,17 +2,10 @@ import RSVP = require('rsvp');
 import irc = require('slate-irc');
 import net = require('net');
 
-import {Bot, BotConfig} from './nanobot';
+import {Bot} from './nanobot';
+import {cfg} from './config';
 
 var speak = require('speakeasy-nlp');
-
-const cfg: BotConfig = {
-    nick: 'Methbot',
-    password: 'Foo123',
-    user: 'https://github.com/basp/methbot',
-    username: 'Methbot',
-    channel: '##vanityguild'
-};
 
 const stream = net.connect({
     port: 6667,
