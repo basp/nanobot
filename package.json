@@ -11,9 +11,16 @@
     "url": "https://github.com/basp/nanobot"
   },
   "dependencies": {
+    "greetings": "^1.0.0",
+    "leveldown": "^1.4.6",
+    "levelgraph": "^1.1.4",
+    "levelup": "^1.3.2",
+    "lodash": "^4.12.0",
     "markov": "0.0.7",
+    "rivescript": "^1.12.2",
     "rsvp": "^3.2.1",
     "slate-irc": "^0.8.1",
-    "speakeasy-nlp": "^0.2.2"
+    "speakeasy-nlp": "^0.2.2",
+    "string": "^3.3.1"
   }
 }

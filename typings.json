@@ -1,6 +1,9 @@
 {
   "globalDependencies": {
+    "levelup": "registry:dt/levelup#0.0.0+20160316155526",
+    "lodash": "registry:dt/lodash#3.10.0+20160330154726",
     "node": "registry:dt/node#6.0.0+20160514165920",
-    "slate-irc": "registry:dt/slate-irc#0.0.0+20160223124646"
+    "slate-irc": "registry:dt/slate-irc#0.0.0+20160223124646",
+    "string": "registry:dt/string#0.0.0+20160316155526"
   }
 }

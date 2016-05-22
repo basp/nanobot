@@ -44,13 +44,12 @@ export interface Bot {
 }
 
 export class Bot {
-    private client: irc.Client;
+    public client: irc.Client;
     private stacks = {};
     private cfg: BotConfig;
 
     constructor(client: irc.Client) {
         this.client = client;
-
         EVENTS.forEach(n => this.client.on(n, data => {
             if (!this.stacks[n]) return;
             this.run(data, this.stacks[n]);
@@ -76,7 +75,7 @@ export class Bot {
         }
         if (!this.stacks['message']) this.stacks['message'] = [];
         const handler = (e: irc.MessageEvent, next) => {
-            if (e.to === this.cfg.nick) return next();
+            if (e.to.toLowerCase() === this.cfg.nick.toLowerCase()) return next();
             if (!(<RegExp>pat).test(e.message)) return next();
             const m = (<RegExp>pat).exec(e.message);
             fn(e, m);
@@ -92,7 +91,7 @@ export class Bot {
         }
         if (!this.stacks['message']) this.stacks['message'] = [];
         const handler = (e: irc.MessageEvent, next) => {
-            if (e.to !== this.cfg.nick) return next();
+            if (e.to.toLowerCase() !== this.cfg.nick.toLowerCase()) return next();
             if (!(<RegExp>pat).test(e.message)) return next();
             const m = (<RegExp>pat).exec(e.message);
             fn(e, m);
@@ -134,6 +133,7 @@ export class Bot {
         let cont = false;
         let next = () => { cont = true };
         for (var i = 0; i < stack.length; i++) {
+            cont = false;
             stack[i](data, next);
             if (!cont) break;
         }

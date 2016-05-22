@@ -1,0 +1,70 @@
++ (activate|enter) debug mode [*]
+* <id> == <bot master> => Entering debug mode.\s
+^ Issue "done" when done.{topic=debug}
+- Sorry <id>, only <bot master> can put me into debug mode.
+
++ (activate|enter) study mode [*]
+- Ok <id> we are now entering study mode. Just say "meth, done" when done.{topic=study}
+- Yay <id>! We are now officially studying! Just say "meth, done" when done!{topic=study}
+
+> topic study
+    + help
+    - <id>, you and me are now studying. This means I won't respond randomly\s
+    ^ anymore but instead I'm listening to certain commands.\s
+    ^ Try telling me things like "blue is a color" or "cars are cool".\s
+    ^ You can also ask me about things I know about using "about subject"\s
+    ^ and "subjects".
+
+    + about subject
+    - You can use this command to find out random things I know about stuff.\s
+    ^ You can use the "subjects" command to see what kind of subjects I know about.\s
+    ^ Just type "meth, subjects" to get started.
+
+    + * is *
+    - From that I understand that <star1> has the quality of being <star2>.\s
+    ^ <call>putTriple <star1> is <star2></call>
+
+    + * are *
+    - From that I understand that <star1> have the quality of being <star2>.\s
+    - <call>putTriple <star1> are <star2></call>
+
+    + about *
+    - <call>about <star1></call>
+    
+    + subjects
+    - <call>subjects</call>
+    
+    + done
+    - Okies <id>! Leaving study mode. Let's study more sometime!{topic=random}
+    
+    + *
+    - Try making statements such as "blue is a color"\s
+    ^ or "bots are awesome". You can then find out if I\s
+    ^ remembered anything by asking me stuff using "about topic". 
+
+< topic
+
+> topic debug
+
+    + catstory *
+    - <call>catstory <star></call>
+
+    + plato *
+    - <call>plato <star></call>
+
+    + shakespeare *
+    - <call>shakespeare <star></call>
+
+    + chat *
+    - <call>chat <star></call>
+
+    + sentiment
+    - <call>sentiment</call>
+    
+    + leave debug mode
+    @ done
+
+    + done
+    - Leaving debug mode.{topic=random}
+
+< topic
