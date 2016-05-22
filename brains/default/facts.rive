@@ -20,6 +20,10 @@
 + the location of * is [in] *
 - From that I understand that the location of <star1> is in <star2>.
 
++ * is in *
+- From that I understand that the location of <star1> is in <star2>.\s
+^ <call>putTriple <star1> location <star2></call>
+
 + * is (located|situated) in *
 - From that I understand that the location of <star1> is in <star3>.\s
 ^ <call>putTriple <star1> location <star3></call>
